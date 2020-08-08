@@ -75,7 +75,7 @@ class PertanyaanController extends Controller
     {
         $pertanyaan = DB::table('pertanyaan')->where('id',$id)->first();
 
-        return view('Pertanyaan.edit',compact('pertanyaan'));
+        return view('Pertanyaan.edit', compact('pertanyaan'));
     }
 
     /**
@@ -92,13 +92,13 @@ class PertanyaanController extends Controller
             'isi' => 'required'
         ]);
 
-        $query = DB::table('pertanyaan')
-                    ->where('id', $id)
-                    ->update([
-                        'judul' => $request['judul'],
-                        'isi'   => $request['isi']
-        ]);
-        return redirect('/pertanyaan')->with('success', 'Post Behasil diupdate');
+        $pertanyaan = DB::table('pertanyaan')
+              ->where('id', $id)
+              ->update([
+                  'judul' => $request['judul'],
+                  'isi'   => $request['isi']
+              ]);
+        return redirect('/pertanyaan')->with('success', 'Berhasil di update');
     }
 
     /**

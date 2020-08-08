@@ -33,13 +33,13 @@
                         <td>{{$a->judul}}</td>
                         <td>{{$a->isi}}</td>
                         <td style="display: flex;">
+                            <a href="/pertanyaan/{{ $a->id }}/detail" class="btn btn-info btn-sm">Detail</a>
                             <a href="/pertanyaan/{{ $a->id }}/edit" class="btn btn-warning btn-sm">Edit</a>
                             <form action="/pertanyaan/{{ $a->id }}" method="post">
-                            @csrf    
-                            @method('DELETE')
+                                @csrf
+                                @method('DELETE')
                                 <input type="submit" value="delete" class="btn btn-danger btn-sm">
                             </form>
-                            <a href="/pertanyaan/{{ $a->id }}/detail" class="btn btn-info btn-sm">Detail</a>
                         </td>
                     </tr>
                     @endforeach
