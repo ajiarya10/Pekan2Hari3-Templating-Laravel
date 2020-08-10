@@ -24,6 +24,8 @@
                     <tr>
                         <th>Judul</th>
                         <th>Isi</th>
+                        <th>Tanggal Dibuat</th>
+                        <th>Tanggal Diperbarui</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -32,10 +34,12 @@
                     <tr>
                         <td>{{$a->judul}}</td>
                         <td>{{$a->isi}}</td>
+                        <td>{{$a->updated_at}}</td>
+                        <td>{{$a->created_at}}</td>
                         <td style="display: flex;">
-                            <a href="/pertanyaan/{{ $a->id }}/detail" class="btn btn-info btn-sm">Detail</a>
-                            <a href="/pertanyaan/{{ $a->id }}/edit" class="btn btn-warning btn-sm">Edit</a>
-                            <form action="/pertanyaan/{{ $a->id }}" method="post">
+                            <a href="{{route('pertanyaan.show',['pertanyaan' => $a->id])}}" class="btn btn-info btn-sm">Detail</a>
+                            <a href="{{route('pertanyaan.edit',['pertanyaan' => $a->id])}}" class="btn btn-warning btn-sm">Edit</a>
+                            <form action="{{route('pertanyaan.destroy',['pertanyaan' => $a->id])}}" method="post">
                                 @csrf
                                 @method('DELETE')
                                 <input type="submit" value="delete" class="btn btn-danger btn-sm">

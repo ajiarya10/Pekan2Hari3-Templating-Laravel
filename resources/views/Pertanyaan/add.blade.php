@@ -8,7 +8,7 @@
             <h3 class="card-title">Create Question</h3>
         </div>
         <!-- /.card-header -->
-        <form role="form" action="/pertanyaan" method="post">
+        <form role="form" action="{{route('pertanyaan.store')}}" method="post">
             @csrf
             <div class="card-body">
                 <!-- <div class="form-group">

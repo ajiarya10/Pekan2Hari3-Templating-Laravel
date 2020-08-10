@@ -8,7 +8,7 @@
             <h3 class="card-title">Edit Question {{$pertanyaan->id}}</h3>
         </div>
         <!-- /.card-header -->
-        <form role="form" action="/pertanyaan/{{$pertanyaan->id}}" method="post">
+        <form role="form" action="{{route('pertanyaan.update',['pertanyaan' => $pertanyaan->id])}}" method="post">
             <!-- {{ csrf_field() }}
             {{ method_field('PUT') }} -->
             @csrf

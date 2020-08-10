@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Pertanyaan;
 
 class PertanyaanController extends Controller
 {
@@ -15,8 +16,8 @@ class PertanyaanController extends Controller
     public function index()
     {
         // mengambil data dari table pegawai
-    	$pertanyaan = DB::table('pertanyaan')->get();
- 
+    	// $pertanyaan = DB::table('pertanyaan')->get();
+        $pertanyaan = Pertanyaan::all();
     	// mengirim data pegawai ke view index
     	return view('Pertanyaan.show',['pertanyaan' => $pertanyaan]);
     }
@@ -45,10 +46,15 @@ class PertanyaanController extends Controller
             'isi' => 'required'
         ]);
 
-        DB::table('pertanyaan')->insert([
-            'judul' => $request['judul'],
-            'isi'   => $request['isi']
-        ]); 
+        // DB::table('pertanyaan')->insert([
+        //     'judul' => $request['judul'],
+        //     'isi'   => $request['isi']
+        // ]); 
+
+        $pertanyaan = new Pertanyaan;
+        $pertanyaan->judul  = $request['judul'];
+        $pertanyaan->isi    = $request['isi'];
+        $pertanyaan->save();
 
         return redirect('/pertanyaan')->with('success', 'Post Behasil ditambah');
     }
@@ -61,7 +67,8 @@ class PertanyaanController extends Controller
      */
     public function show($id)
     {
-        $pertanyaan = DB::table('pertanyaan')->where('id', $id)->first();
+        // $pertanyaan = DB::table('pertanyaan')->where('id', $id)->first();
+        $pertanyaan = Pertanyaan::find($id);
         return view('Pertanyaan.detail', compact('pertanyaan'));
     }
 
@@ -73,7 +80,9 @@ class PertanyaanController extends Controller
      */
     public function edit($id)
     {
-        $pertanyaan = DB::table('pertanyaan')->where('id',$id)->first();
+        // $pertanyaan = DB::table('pertanyaan')->where('id',$id)->first();
+
+        $pertanyaan = Pertanyaan::find($id);
 
         return view('Pertanyaan.edit', compact('pertanyaan'));
     }
@@ -87,17 +96,16 @@ class PertanyaanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'judul' => 'required|unique:pertanyaan|max:255',
-            'isi' => 'required'
+        // $pertanyaan = DB::table('pertanyaan')
+        //       ->where('id', $id)
+        //       ->update([
+        //           'judul' => $request['judul'],
+        //           'isi'   => $request['isi']
+        //       ]);
+        $pertanyaan = Pertanyaan::where('id', $id)->update([
+            'judul' => $request['judul'],
+            'isi'   => $request['isi']
         ]);
-
-        $pertanyaan = DB::table('pertanyaan')
-              ->where('id', $id)
-              ->update([
-                  'judul' => $request['judul'],
-                  'isi'   => $request['isi']
-              ]);
         return redirect('/pertanyaan')->with('success', 'Berhasil di update');
     }
 
@@ -109,7 +117,8 @@ class PertanyaanController extends Controller
      */
     public function destroy($id)
     {
-        DB::table('pertanyaan')->where('id', $id)->delete();
+        // DB::table('pertanyaan')->where('id', $id)->delete();
+        Pertanyaan::destroy($id);
         return redirect('/pertanyaan')->with('success', 'Post Berhasil di delete');
     }
 }

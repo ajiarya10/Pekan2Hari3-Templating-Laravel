@@ -48,7 +48,7 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="/pertanyaan" class="nav-link">
+                    <a href="{{route('pertanyaan.index')}}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Pertanyaan
