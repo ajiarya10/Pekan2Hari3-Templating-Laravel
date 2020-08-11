@@ -15,7 +15,7 @@
                     alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">Alexander Pierce</a>
+                <a href="#" class="d-block">{{ Auth::user()->name }}</a>
             </div>
         </div>
 
@@ -34,13 +34,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/" class="nav-link">
+                            <a href="/data-tables1" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Tables 1</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/data-tables" class="nav-link">
+                            <a href="/data-tables2" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Tables 2</p>
                             </a>

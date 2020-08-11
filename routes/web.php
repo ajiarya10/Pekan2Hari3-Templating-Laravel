@@ -10,12 +10,15 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/data-tables1', function () {
     return view('table.table1');
 });
 
-Route::get('/data-tables', function () {
+Route::get('/data-tables2', function () {
     return view('table.table2');
 });
 
@@ -28,3 +31,6 @@ Route::get('/data-tables', function () {
 // Route::delete('/pertanyaan/{id}', 'PertanyaanController@destroy');
 
 Route::resource('pertanyaan','PertanyaanController');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

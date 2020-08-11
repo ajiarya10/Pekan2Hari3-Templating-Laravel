@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Pertanyaan;
+use Auth;
 
 class PertanyaanController extends Controller
 {
@@ -13,6 +14,11 @@ class PertanyaanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         // mengambil data dari table pegawai
@@ -52,8 +58,9 @@ class PertanyaanController extends Controller
         // ]); 
 
         $pertanyaan = new Pertanyaan;
-        $pertanyaan->judul  = $request['judul'];
-        $pertanyaan->isi    = $request['isi'];
+        $pertanyaan->judul      = $request['judul'];
+        $pertanyaan->isi        = $request['isi'];
+        // $pertanyaan->profile_id    = Auth::id();
         $pertanyaan->save();
 
         return redirect('/pertanyaan')->with('success', 'Post Behasil ditambah');
